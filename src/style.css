@@ -1,0 +1,21 @@
+#board{
+  width: 60vw;
+  height: 60vh;
+  display: grid;
+  grid-template-rows: repeat(8,1fr);
+  border: 1px solid black;
+}
+.row{
+  display: grid;
+  grid-template-columns: repeat(8,1fr);
+}
+#board .row:nth-child(even) .board-square:nth-child(odd){
+  background-color: white;
+}
+#board .row:nth-child(even) .board-square:nth-child(odd){
+  background-color: black;
+}
+
+#board .row:nth-child(odd) .board-square:nth-child(even){
+  background-color: black;
+}

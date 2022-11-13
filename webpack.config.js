@@ -7,7 +7,6 @@ module.exports = {
   output: {
     filename: "main.js",
     path: path.resolve(__dirname, "dist"),
-    clean: true,
   },
   devtool: "inline-source-map",
   plugins: [
@@ -20,19 +19,23 @@ module.exports = {
     rules: [
       {
         test: /\.html$/i,
-        loader: "html-loader",
+        use: "html-loader",
+        exclude: /node_modules/,
       },
       {
         test: /\.css$/i,
-        use: ["style-loard", "css-loader"],
+        use: ['style-loader', 'css-loader'],
+        exclude: /node_modules/,
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
         type: "asset/resource",
+        exclude: /node_modules/,
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/i,
         type: "asset/resource",
+        exclude: /node_modules/,
       },
     ],
   },
