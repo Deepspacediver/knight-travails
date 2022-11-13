@@ -10,12 +10,18 @@ Pseudocode:
 7 [0,1,2,3,4,5,6,7]
 6 [0,1,2,3,4,5,6,7]                             
 5 [0,1,2,3,4,5,6,7]
-4 [0,1,2,3,4,5,6,7]                     { Xindex = row (row as data-set in html)
-3 [0,1,2,3,4,5,6,7]                     YIndex = column (column as data-set in html) }
-2 [0,1,2,3,4,5,6,7]           OuterArray = Y      
-1 [0,1,2,3,4,5,6,7]           Inner Array = X    Coordinates = [index of X, index of Y]
+4 [0,1,2,3,4,5,6,7]                     
+3 [0,1,2,3,4,5,6,7]                     
+2 [0,1,2,3,4,5,6,7]           
+1 [0,1,2,3,4,5,6,7]          
 0 [0,1,2,3,4,5,6,7]                    
-]                                      
+]                      
+
+{ Xindex = row (row as data-set in html)
+YIndex = column (column as data-set in html) }
+  
+  OuterArray = Y      
+  Inner Array = X    Coordinates = [index of X, index of Y]
   if (coordinates[0] <0 || coordinates[1] <0 || coordinates [0] > 7 || coordinates[1] > 7) invalid move
 
 move 1 left  = X[index-1] 
