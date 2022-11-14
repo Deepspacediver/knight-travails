@@ -16,7 +16,5 @@ class ChessBoard {
 
 const gameBoard = new ChessBoard()
 
-console.log(gameBoard)
-console.log(gameBoard.board[1][2])
 
 export default gameBoard

@@ -82,3 +82,19 @@ return first shortest match
     
     3,1
     2,3 2,-1 return| 4,3 4,-1 return| 1,0 5,0| 1,2 !!(5,2) match!! previous value += match
+
+
+
+1.Store adjacency list as a new Map
+2.Input knight's first position
+3.Generate all possible moves from the first position and store them in 
+the key of the first position
+  -Before generating new moves filter the array for undefined(illegal moves)
+
+Input knight's destination
+Check if position is not in the generated moves
+  if true return key value pair 
+  else recursively search for Destination
+    let trailArray = trailArray.concat(GeneratePosition + GenerateMoves)
+  Check if adjacency list contains soon to be generated position
+For each possible move do the same until wanted position is found 
