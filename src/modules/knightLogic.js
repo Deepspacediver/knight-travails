@@ -7,49 +7,49 @@ class Knight {
 
   leftUp(position = this.position) {
     const move = [position[0] - 1, position[1] + 2];
-    if (move[0] < 0 || move[0] > 7 || move[1] < 0 || move[1] > 7) return;
+    if (move[0] < 0 || move[0] > 7 || move[1] < 0 || move[1] > 7) return undefined;
     return move;
   }
 
   leftDown(position = this.position) {
     const move = [position[0] - 1, position[1] - 2];
-    if (move[0] < 0 || move[0] > 7 || move[1] < 0 || move[1] > 7) return;
+    if (move[0] < 0 || move[0] > 7 || move[1] < 0 || move[1] > 7) return undefined;
     return move;
   }
 
   rightUp(position = this.position) {
     const move = [position[0] + 1, position[1] + 2];
-    if (move[0] < 0 || move[0] > 7 || move[1] < 0 || move[1] > 7) return;
+    if (move[0] < 0 || move[0] > 7 || move[1] < 0 || move[1] > 7) return undefined;
     return move;
   }
 
   rightDown(position = this.position) {
     const move = [position[0] + 1, position[1] - 2];
-    if (move[0] < 0 || move[0] > 7 || move[1] < 0 || move[1] > 7) return;
+    if (move[0] < 0 || move[0] > 7 || move[1] < 0 || move[1] > 7) return undefined;
     return move;
   }
 
   downRight(position = this.position) {
     const move = [position[0] + 2, position[1] - 1];
-    if (move[0] < 0 || move[0] > 7 || move[1] < 0 || move[1] > 7) return;
+    if (move[0] < 0 || move[0] > 7 || move[1] < 0 || move[1] > 7) return undefined;
     return move;
   }
 
   downLeft(position = this.position) {
     const move = [position[0] - 2, position[1] - 1];
-    if (move[0] < 0 || move[0] > 7 || move[1] < 0 || move[1] > 7) return;
+    if (move[0] < 0 || move[0] > 7 || move[1] < 0 || move[1] > 7) return undefined;
     return move;
   }
 
   upRight(position = this.position) {
     const move = [position[0] + 2, position[1] + 1];
-    if (move[0] < 0 || move[0] > 7 || move[1] < 0 || move[1] > 7) return;
+    if (move[0] < 0 || move[0] > 7 || move[1] < 0 || move[1] > 7) return undefined;
     return move;
   }
 
   upLeft(position = this.position) {
     const move = [position[0] - 2, position[1] + 1];
-    if (move[0] < 0 || move[0] > 7 || move[1] < 0 || move[1] > 7) return;
+    if (move[0] < 0 || move[0] > 7 || move[1] < 0 || move[1] > 7) return undefined;
     return move;
   }
 
@@ -61,7 +61,7 @@ class Knight {
     return String(position);
   } */
 
-  generateNewPosition(position, list = this.adjacencyList) {
+  generateNewPosition(position = this.position, list = this.adjacencyList) {
     const positionStringified = String(position);
     if (list.has(positionStringified)) return;
     list.set(positionStringified, []);
@@ -69,29 +69,38 @@ class Knight {
 
   clearOfIllegalMoves(array = this.adjacencyList.get(String(this.position))) {
     array.forEach((move) => {
-      if(move === undefined) {
-        const index = array.findIndex((el) => el === move)
-        array.splice(index, 1)
+        console.log({move})
+        if (move === undefined) {
+        const index = array.findIndex((el) => el === move);
+        console.log(index, array.length, array)
+        array.splice(index, 1);
       }
-    })
+    });
   }
 
   generateMoves(position = this.position, list = this.adjacencyList) {
-    const positionStringified = String(position);
-    const movesArray = list.get(positionStringified);
-    movesArray
-      .push(
-        this.leftDown(),
-        this.leftUp(),
-        this.rightDown(),
-        this.rightUp(),
-        this.downLeft(),
-        this.downRight(),
-        this.upLeft(),
-        this.upRight()
-      );
-    this.clearOfIllegalMoves(movesArray)
-    // list.get(positionStringified) = list.get(positionStringified).filter((move) => move !== undefined)
+    let positionStringified = position;
+    if (Array.isArray(position)) positionStringified = String(position);
+    let arrayOfMoves  = []
+    arrayOfMoves.push(
+      this.leftDown(position),
+      this.leftUp(position),
+      this.rightDown(position),
+      this.rightUp(position),
+      this.downLeft(position),
+      this.downRight(position),
+      this.upLeft(position),
+      this.upRight(position)
+    );
+    arrayOfMoves = arrayOfMoves.filter((e) => e !== undefined)
+    list.set(positionStringified, arrayOfMoves)
+
+    
+  }
+
+  findPath(destination, position = this.position, list = this.adjacencyList) {
+    let queue = []
+    let visitedNodes = {}
   }
 }
 
@@ -101,7 +110,11 @@ console.log(myKnight);
 
 // console.log(myKnight.adjacencyList.get("1,2").push(myKnight.upLeft()));
 
-console.log([
+myKnight.generateNewPosition([0,0])
+myKnight.generateMoves([0,0])
+console.log(myKnight);
+
+/* console.log([
   myKnight.leftDown(),
   myKnight.leftUp(),
   myKnight.rightDown(),
@@ -111,6 +124,6 @@ console.log([
   myKnight.upLeft(),
   myKnight.upRight(),
 ]);
-myKnight.generateNewPosition([2, 3]);
-myKnight.generateMoves();
-console.log(myKnight.adjacencyList);
+ */
+
+
