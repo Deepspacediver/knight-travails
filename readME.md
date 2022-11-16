@@ -88,13 +88,14 @@ return first shortest match
 1.Store adjacency list as a new Map
 2.Input knight's first position
 3.Generate all possible moves from the first position and store them in 
-the key of the first position
+the key of the0 first position
   -Before generating new moves filter the array for undefined(illegal moves)
 
-Input knight's destination
-Check if position is not in the generated moves
-  if true return key value pair 
-  else recursively search for Destination
-    let trailArray = trailArray.concat(GeneratePosition + GenerateMoves)
-  Check if adjacency list contains soon to be generated position
-For each possible move do the same until wanted position is found 
+  Use BFS with queue:
+  Generate key and moves for position
+  push position into queue
+  Add position as array to visisted
+Add position into queue
+  In queue 
+
+

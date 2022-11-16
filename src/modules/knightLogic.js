@@ -1,55 +1,64 @@
+import isEqual from "lodash.isequal";
+
 class Knight {
   constructor(position = [1, 2]) {
     this.position = position;
     this.adjacencyList = new Map();
-    this.adjacencyList.set(String(this.position), []);
   }
 
   leftUp(position = this.position) {
     const move = [position[0] - 1, position[1] + 2];
-    if (move[0] < 0 || move[0] > 7 || move[1] < 0 || move[1] > 7) return undefined;
+    if (move[0] < 0 || move[0] > 7 || move[1] < 0 || move[1] > 7)
+      return undefined;
     return move;
   }
 
   leftDown(position = this.position) {
     const move = [position[0] - 1, position[1] - 2];
-    if (move[0] < 0 || move[0] > 7 || move[1] < 0 || move[1] > 7) return undefined;
+    if (move[0] < 0 || move[0] > 7 || move[1] < 0 || move[1] > 7)
+      return undefined;
     return move;
   }
 
   rightUp(position = this.position) {
     const move = [position[0] + 1, position[1] + 2];
-    if (move[0] < 0 || move[0] > 7 || move[1] < 0 || move[1] > 7) return undefined;
+    if (move[0] < 0 || move[0] > 7 || move[1] < 0 || move[1] > 7)
+      return undefined;
     return move;
   }
 
   rightDown(position = this.position) {
     const move = [position[0] + 1, position[1] - 2];
-    if (move[0] < 0 || move[0] > 7 || move[1] < 0 || move[1] > 7) return undefined;
+    if (move[0] < 0 || move[0] > 7 || move[1] < 0 || move[1] > 7)
+      return undefined;
     return move;
   }
 
   downRight(position = this.position) {
     const move = [position[0] + 2, position[1] - 1];
-    if (move[0] < 0 || move[0] > 7 || move[1] < 0 || move[1] > 7) return undefined;
+    if (move[0] < 0 || move[0] > 7 || move[1] < 0 || move[1] > 7)
+      return undefined;
     return move;
   }
 
   downLeft(position = this.position) {
     const move = [position[0] - 2, position[1] - 1];
-    if (move[0] < 0 || move[0] > 7 || move[1] < 0 || move[1] > 7) return undefined;
+    if (move[0] < 0 || move[0] > 7 || move[1] < 0 || move[1] > 7)
+      return undefined;
     return move;
   }
 
   upRight(position = this.position) {
     const move = [position[0] + 2, position[1] + 1];
-    if (move[0] < 0 || move[0] > 7 || move[1] < 0 || move[1] > 7) return undefined;
+    if (move[0] < 0 || move[0] > 7 || move[1] < 0 || move[1] > 7)
+      return undefined;
     return move;
   }
 
   upLeft(position = this.position) {
     const move = [position[0] - 2, position[1] + 1];
-    if (move[0] < 0 || move[0] > 7 || move[1] < 0 || move[1] > 7) return undefined;
+    if (move[0] < 0 || move[0] > 7 || move[1] < 0 || move[1] > 7)
+      return undefined;
     return move;
   }
 
@@ -61,11 +70,11 @@ class Knight {
     return String(position);
   } */
 
-  generateNewPosition(position = this.position, list = this.adjacencyList) {
+  /* generateNewPosition(position = this.position, list = this.adjacencyList) {
     const positionStringified = String(position);
     if (list.has(positionStringified)) return;
     list.set(positionStringified, []);
-  }
+  } 
 
   clearOfIllegalMoves(array = this.adjacencyList.get(String(this.position))) {
     array.forEach((move) => {
@@ -77,11 +86,11 @@ class Knight {
       }
     });
   }
-
+*/
   generateMoves(position = this.position, list = this.adjacencyList) {
     let positionStringified = position;
     if (Array.isArray(position)) positionStringified = String(position);
-    let arrayOfMoves  = []
+    let arrayOfMoves = [];
     arrayOfMoves.push(
       this.leftDown(position),
       this.leftUp(position),
@@ -92,15 +101,34 @@ class Knight {
       this.upLeft(position),
       this.upRight(position)
     );
-    arrayOfMoves = arrayOfMoves.filter((e) => e !== undefined)
-    list.set(positionStringified, arrayOfMoves)
-
-    
+    arrayOfMoves = arrayOfMoves.filter((e) => e !== undefined);
+    list.set(positionStringified, arrayOfMoves);
   }
 
   findPath(destination, position = this.position, list = this.adjacencyList) {
-    let queue = []
-    let visitedNodes = {}
+    const queue = [];
+    const result = [];
+    const visitedNodes = {};
+
+    queue.push(position);
+    visitedNodes[position] = true;
+
+    while (queue.length !== 0) {
+      let firstInQ = queue[0];
+      console.log(firstInQ);
+      result.push(firstInQ);
+      visitedNodes[firstInQ] = true;
+      this.generateMoves(firstInQ);
+      console.log(list.get(String(firstInQ)));
+      if (list.get(String(firstInQ)).some((el) => isEqual(el, destination))) {
+        result.push(destination);
+        return result;
+      }
+      list.get(String(firstInQ)).forEach((move) => {
+        if (visitedNodes[move] !== true) queue.push(move);
+      });
+      queue.shift();
+    }
   }
 }
 
@@ -110,8 +138,8 @@ console.log(myKnight);
 
 // console.log(myKnight.adjacencyList.get("1,2").push(myKnight.upLeft()));
 
-myKnight.generateNewPosition([0,0])
-myKnight.generateMoves([0,0])
+// myKnight.generateNewPosition([0, 0]);
+console.log(myKnight.findPath([2, 4], [1, 2]))
 console.log(myKnight);
 
 /* console.log([
@@ -125,5 +153,3 @@ console.log(myKnight);
   myKnight.upRight(),
 ]);
  */
-
-
