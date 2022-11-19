@@ -1,20 +1,20 @@
-
 class ChessBoard {
-  constructor(){
-    this.board = [
-      [0,1,2,3,4,5,6,7],
-      [0,1,2,3,4,5,6,7],
-      [0,1,2,3,4,5,6,7],
-      [0,1,2,3,4,5,6,7],
-      [0,1,2,3,4,5,6,7],
-      [0,1,2,3,4,5,6,7],
-      [0,1,2,3,4,5,6,7],
-      [0,1,2,3,4,5,6,7],
-    ]
+  constructor() {
+    this.board = [];
+  }
+
+  generateBoard() {
+    for (let i = 0; i <= 7; i+=1) {
+      const column = [];
+      for (let j = 0; j <= 7; j+=1) {
+        column.push("");
+      }
+      this.board.push(column);
+    }
   }
 }
 
-const gameBoard = new ChessBoard()
-
-
-export default gameBoard
+const gameBoard = new ChessBoard();
+gameBoard.generateBoard()
+console.log(gameBoard)
+export default gameBoard;

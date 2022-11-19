@@ -69,20 +69,10 @@ class Knight {
     return string.split(",").map((move) => Number(move));
   }
 
-  /*  convertPositionToString(position = this.position) {
-    return String(position);
-  } */
-
-  /* generateNewPosition(position = this.position, list = this.adjacencyList) {
-    const positionStringified = String(position);
-    if (list.has(positionStringified)) return;
-    list.set(positionStringified, []);
-  } 
-
-*/
   generateMoves({ move, predecessor }, list = this.adjacencyList) {
-    let positionStringified = move;
+    let positionStringified;
     if (Array.isArray(move)) positionStringified = String(move);
+
     let arrayOfMoves = [];
     arrayOfMoves.push(
       this.leftDown(move),
@@ -98,33 +88,19 @@ class Knight {
     list.set(positionStringified, { predecessor, arrayOfMoves });
   }
 
-  findShortestPath(destination, list = this.adjacencyList) {
-    let lastMapKey = Array.from(list.keys()).pop();
-    const result = [this.convertStringToPosition(lastMapKey) ,destination];
-    let previousMove = list.get(lastMapKey).predecessor
-    while(previousMove!== null){
-      result.unshift(previousMove)
-      previousMove = list.get(String(previousMove)).predecessor
-    }
-    return result
-  }
-
   findPath(destination, position = this.position, list = this.adjacencyList) {
     if (this.isIllegalMove(destination)) return "Illegal move";
 
     const queue = [];
     const visitedNodes = {};
-    let previousNode = 0;
 
     queue.push(position);
     visitedNodes[position] = true;
 
     while (queue.length !== 0) {
       let firstInQ = queue[0];
-
       visitedNodes[firstInQ.move] = true;
       this.generateMoves(firstInQ);
-
       if (
         list
           .get(String(firstInQ.move))
@@ -132,10 +108,9 @@ class Knight {
       ) {
         visitedNodes[destination] = true;
         console.log(visitedNodes);
-        return;
+        return this.findShortestPath(destination);
       }
       list.get(String(firstInQ.move)).arrayOfMoves.forEach((move) => {
-        // if (!list.has(String(move))) queue.push(move);
         if (visitedNodes[move.move] !== true) {
           queue.push(move);
         }
@@ -143,33 +118,27 @@ class Knight {
       queue.shift();
     }
   }
+
+  findShortestPath(destination, list = this.adjacencyList) {
+    const lastMapKey = Array.from(list.keys()).pop();
+    const result = [this.convertStringToPosition(lastMapKey), destination];
+
+    let previousMove = list.get(lastMapKey).predecessor;
+    while (previousMove !== null) {
+      result.unshift(previousMove);
+      previousMove = list.get(String(previousMove)).predecessor;
+    }
+
+    return {
+      message: `You made it in ${result.length - 1} moves`,
+      path: result,
+    };
+  }
 }
 
-const myKnight = new Knight();
-console.log(myKnight);
-/* console.log(myKnight.generateMoves([1,2], 0))
-console.log(myKnight.generateMoves([2,4], [1,2]))
-console.log(myKnight.adjacencyList.get('2,4').moves.some((el) => isEqual(el, [3,6]))) */
-// console.log(myKnight.generateMoves({move:[1,2]}));
-// console.log(myKnight.generateMoves({move:[2,4], predecessor:[1,2] }));
-
-// console.log(myKnight.adjacencyList.get(String([1,2])).moves)
-console.log(myKnight.findPath([7,7]));
- console.log(myKnight.findShortestPath([7,7]))
-/* myKnight.generateMoves({move:[1,2]})
-console.log(myKnight.adjacencyList.get(String([1,2])).arrayOfMoves.forEach((move) => {
-  // if (!list.has(String(move))) queue.push(move);
-    myKnight.generateMoves(move)
-  }
-)) 
-console.log( 
-  myKnight.adjacencyList.get(String([1,2])).arrayOfMoves.some((el) => isEqual(el.move, [2,4]))
- ) */
+let myKnight = new Knight([3, 3]);
 console.log(myKnight);
 
-/* const iterate = (map) => {
-  for (const entry of map) {
-    console.log(entry);
-  }
-};
-iterate(myKnight.adjacencyList); */
+console.log(myKnight.findPath([4, 3]));
+
+console.log(myKnight);
