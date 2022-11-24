@@ -4,9 +4,9 @@ class ChessBoard {
   }
 
   generateBoard() {
-    for (let i = 0; i <= 7; i+=1) {
+    for (let i = 0; i <= 7; i += 1) {
       const column = [];
-      for (let j = 0; j <= 7; j+=1) {
+      for (let j = 0; j <= 7; j += 1) {
         column.push("");
       }
       this.board.push(column);
@@ -15,6 +15,6 @@ class ChessBoard {
 }
 
 const gameBoard = new ChessBoard();
-gameBoard.generateBoard()
-console.log(gameBoard)
+gameBoard.generateBoard();
+
 export default gameBoard;

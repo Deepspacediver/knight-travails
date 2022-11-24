@@ -90,6 +90,7 @@ class Knight {
 
   findPath(destination, position = this.position, list = this.adjacencyList) {
     if (this.isIllegalMove(destination)) return "Illegal move";
+    if(isEqual(destination, position.move)) return "You are already here"
 
     const queue = [];
     const visitedNodes = {};
@@ -130,15 +131,15 @@ class Knight {
     }
 
     return {
-      message: `You made it in ${result.length - 1} moves`,
+      message: `You made it in ${result.length - 1} move(s)`,
       path: result,
     };
   }
 }
 
-let myKnight = new Knight([3, 3]);
+let myKnight = new Knight([1, 2]);
 console.log(myKnight);
 
-console.log(myKnight.findPath([4, 3]));
+console.log(myKnight.findPath([2, 4]));
 
 console.log(myKnight);
