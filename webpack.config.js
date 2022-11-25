@@ -1,5 +1,4 @@
 const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   mode: "development",
@@ -9,22 +8,12 @@ module.exports = {
     path: path.resolve(__dirname, "dist"),
   },
   devtool: "inline-source-map",
-  plugins: [
-    new HtmlWebpackPlugin({
-      title: "Knight Travails",
-      template: "./src/template.html",
-    }),
-  ],
+  
   module: {
     rules: [
       {
-        test: /\.html$/i,
-        use: "html-loader",
-        exclude: /node_modules/,
-      },
-      {
         test: /\.css$/i,
-        use: ['style-loader', 'css-loader'],
+        use: ["style-loader", "css-loader"],
         exclude: /node_modules/,
       },
       {

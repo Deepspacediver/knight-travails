@@ -1,6 +1,7 @@
 import gameBoard from "./chessBoard";
 
 const boardContainer = document.querySelector("#board");
+console.log(boardContainer)
 const createBoard = (board) => {
   let yIndex = 7;
   board.forEach((row) => {
