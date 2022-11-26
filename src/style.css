@@ -2,8 +2,8 @@ h1{
   color: red;
 }
 #board{
-  width: 60vw;
-  height: 60vh;
+  width: 500px;
+  height: 500px;
   display: grid;
   grid-template-rows: repeat(8,1fr);
   border: 1px solid black;
@@ -17,6 +17,7 @@ h1{
 }
 #board .row:nth-child(even) .board-square:nth-child(odd){
   background-color: black;
+  color: white;
 }
 
 #board .row:nth-child(odd) .board-square:nth-child(even){
@@ -25,4 +26,9 @@ h1{
 
 .hidden {
   display:none;
+}
+
+.board-icon{
+  width: 90%;
+  height: auto;
 }
