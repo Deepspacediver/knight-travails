@@ -55,7 +55,14 @@ const controlDOM = (() => {
     instructions.classList.remove("hidden");
     result.classList.add("hidden");
   };
+
+  // Prevent from calling mutiple events when repeatedly clicking buttons
+  let knightIsCalled = false;
+  let destinationIsCalled = false;
+
   knightBtn.addEventListener("click", () => {
+    if (knightIsCalled) return;
+    knightIsCalled = true;
     if (Array.isArray(startingPoint)) return;
     boardContainer.addEventListener(
       "click",
@@ -70,6 +77,8 @@ const controlDOM = (() => {
   });
 
   destinationBtn.addEventListener("click", () => {
+    if (destinationIsCalled) return;
+    destinationIsCalled = true;
     if (Array.isArray(desinationCords)) return;
     boardContainer.addEventListener(
       "click",
@@ -84,7 +93,7 @@ const controlDOM = (() => {
   });
 
   travailBtn.addEventListener("click", () => {
-    if(instructions.classList.contains('hidden')) return
+    if (instructions.classList.contains("hidden")) return;
     if (startingPoint !== "" && desinationCords !== "") {
       myKnight = new Knight(startingPoint, desinationCords);
       const path = myKnight.findPath();
@@ -97,6 +106,8 @@ const controlDOM = (() => {
     startingPoint = "";
     desinationCords = "";
     myKnight = "";
+    knightIsCalled = false;
+    destinationIsCalled = false;
     const boardIcons = Array.from(document.querySelectorAll(".board-icon"));
     boardIcons.forEach((icon) => icon.remove());
     const squares = Array.from(document.querySelectorAll(".board-square"));
