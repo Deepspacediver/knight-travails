@@ -11,14 +11,21 @@
       <!-- <img src="" alt="" /> -->
       <h1>Knight Travails</h1>
     </header>
-      <div id="board"></div>
-      <div class="game-buttons">
-        <p id="instruction-display"></p>
-        <button class="knight-btn">Place a knight</button>
-        <button class="destination-btn">Choose the destination</button>
-        <a href="#instruction-display" class="travail-btn">Travail</a> 
+    <div id="board"></div>
+    <div class="game-buttons">
+      <div id="instruction-result">
+        <ul class="instructions">
+          <li>Press "Place a knight" and select the starting square</li>
+          <li>Press "Choose the desination" and select the desired square</li>
+          <li>Find shortest path using "Travail"</li>
+        </ul>
+        <p class="result hidden"></p>
       </div>
+      <button class="knight-btn">Place a knight</button>
+      <button class="destination-btn">Choose the destination</button>
+      <a href="#instruction-display" class="travail-btn">Travail</a>
+      <button class="reset-btn">Reset</button>
+    </div>
     <script defer src="./main.js"></script>
-
   </body>
 </html>
