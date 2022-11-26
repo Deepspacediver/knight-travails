@@ -1,9 +1,10 @@
 import isEqual from "lodash.isequal";
 
 class Knight {
-  constructor(position = [1, 2]) {
-    this.position = { move: position, predecessor: null };
+  constructor(coordinates = [1, 2], destination = null) {
+    this.position = { move: coordinates, predecessor: null };
     this.adjacencyList = new Map();
+    this.destination = destination;
   }
 
   leftUp(position = this.position) {
@@ -88,7 +89,7 @@ class Knight {
     list.set(positionStringified, { predecessor, arrayOfMoves });
   }
 
-  findPath(destination, position = this.position, list = this.adjacencyList) {
+  findPath(destination = this.destination, position = this.position, list = this.adjacencyList) {
     if (this.isIllegalMove(destination)) return "Illegal move";
     if(isEqual(destination, position.move)) return "You are already here"
 
@@ -96,7 +97,7 @@ class Knight {
     const visitedNodes = {};
 
     queue.push(position);
-    visitedNodes[position] = true;
+    visitedNodes[position.move] = true;
 
     while (queue.length !== 0) {
       let firstInQ = queue[0];
@@ -118,9 +119,19 @@ class Knight {
       });
       queue.shift();
     }
+    return this
   }
 
-  findShortestPath(destination, list = this.adjacencyList) {
+  formatPath(path) {
+    let formattedPath='';
+    path.forEach((position, i) => {
+      const editedPosition = `Move ${i}: [${position[0]}, ${position[1]}], `
+      formattedPath+= editedPosition
+    }) 
+    return formattedPath.substring(0, formattedPath.length -2) + '.'
+  } 
+
+  findShortestPath(destination = this.destination, list = this.adjacencyList) {
     const lastMapKey = Array.from(list.keys()).pop();
     const result = [this.convertStringToPosition(lastMapKey), destination];
 
@@ -129,17 +140,18 @@ class Knight {
       result.unshift(previousMove);
       previousMove = list.get(String(previousMove)).predecessor;
     }
-
     return {
       message: `You made it in ${result.length - 1} move(s)`,
-      path: result,
+      path: this.formatPath(result),
     };
   }
 }
 
 let myKnight = new Knight([1, 2]);
-console.log(myKnight);
+ console.log(myKnight);
 
-console.log(myKnight.findPath([2, 4]));
+console.log(myKnight.findPath([3, 6]));
 
-console.log(myKnight);
+console.log(myKnight); 
+
+export default Knight
