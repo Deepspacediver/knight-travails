@@ -22,3 +22,7 @@ h1{
 #board .row:nth-child(odd) .board-square:nth-child(even){
   background-color: black;
 }
+
+.hidden {
+  display:none;
+}
