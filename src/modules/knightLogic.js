@@ -142,7 +142,8 @@ class Knight {
     }
     return {
       message: `You made it in ${result.length - 1} move(s)`,
-      path: this.formatPath(result),
+      pathFormatted: this.formatPath(result),
+      path: result,
     };
   }
 }
