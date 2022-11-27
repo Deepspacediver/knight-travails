@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Knight Travails</title>
+  </head>
+  <body>
+    <div class="page-wrap">
+      <header>
+        <!-- <img src="" alt="" /> -->
+        <h1>Knight Travails</h1>
+      </header>
+      <main>
+        <div id="board"></div>
+        <div id="instruction-result">
+          <ol class="instructions">
+            <li>1. Press "Place a knight" and select the starting square.</li>
+            <li>
+              2. Press "Choose the desination" and select the desired square.
+            </li>
+            <li>3. Find shortest path using "Travail".</li>
+          </ol>
+          <p class="result hidden"></p>
+        </div>
+        <div class="game-buttons">
+          <button class="knight-btn button">Place a knight</button>
+          <button class="destination-btn button">Choose the destination</button>
+          <a href="#instruction-display" class="travail-btn button">Travail</a>
+          <button class="reset-btn button">Reset</button>
+        </div>
+      </main>
+    </div>
+    <footer>
+      <ul class="footer-information">
+        <li class="credits">Icons from Flaticon by Good Ware & Umeicon</li>
+        <li class="footer-note">
+          Made with &#10084; by DeepSpaceDiver
+          <a
+            class="github-logo"
+            href="https://github.com/Deepspacediver/knight-travails"
+            ><img class="github-img" alt="github-source"
+          /></a>
+        </li>
+      </ul>
+    </footer>
+    <script defer src="../dist/main.js"></script>
+  </body>
+</html>
