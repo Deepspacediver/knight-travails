@@ -7,35 +7,42 @@
     <title>Knight Travails</title>
   </head>
   <body>
-    <header>
-      <!-- <img src="" alt="" /> -->
-      <h1>Knight Travails</h1>
-    </header>
-    <main>
-      <div id="board"></div>
-      <div class="game-buttons">
+    <div class="page-wrap">
+      <header>
+        <!-- <img src="" alt="" /> -->
+        <h1>Knight Travails</h1>
+      </header>
+      <main>
+        <div id="board"></div>
         <div id="instruction-result">
-          <ul class="instructions">
-            <li>Press "Place a knight" and select the starting square</li>
-            <li>Press "Choose the desination" and select the desired square</li>
-            <li>Find shortest path using "Travail"</li>
-          </ul>
+          <ol class="instructions">
+            <li>1. Press "Place a knight" and select the starting square.</li>
+            <li>
+              2. Press "Choose the desination" and select the desired square.
+            </li>
+            <li>3. Find shortest path using "Travail".</li>
+          </ol>
           <p class="result hidden"></p>
         </div>
-        <button class="knight-btn">Place a knight</button>
-        <button class="destination-btn">Choose the destination</button>
-        <a href="#instruction-display" class="travail-btn">Travail</a>
-        <button class="reset-btn">Reset</button>
-      </div>
-    </main>
+        <div class="game-buttons">
+          <button class="knight-btn button">Place a knight</button>
+          <button class="destination-btn button">Choose the destination</button>
+          <a href="#instruction-display" class="travail-btn button">Travail</a>
+          <button class="reset-btn button">Reset</button>
+        </div>
+      </main>
+    </div>
     <footer>
       <ul class="footer-information">
-        <li>Made with &#10084;</li>
-        <li>by DeepSpaceDiver</li>
-        <li>
-          <a href="">Logo<img alt="" /></a>
+        <li class="credits">Icons from Flaticon by Good Ware & Umeicon</li>
+        <li class="footer-note">
+          Made with &#10084; by DeepSpaceDiver
+          <a
+            class="github-logo"
+            href="https://github.com/Deepspacediver/knight-travails"
+            ><img alt="github-source" src="../src/assets/icons/github-icon.svg"
+          /></a>
         </li>
-        <li>Icons by ...</li>
       </ul>
     </footer>
     <script defer src="./main.js"></script>
