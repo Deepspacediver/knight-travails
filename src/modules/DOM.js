@@ -1,4 +1,7 @@
 import Knight from "./knightLogic";
+import knightImg from "../assets/icons/knight.png";
+import hayImg from "../assets/icons/hay-bale.png";
+import gitImg from "../assets/icons/github-icon.svg";
 
 const boardContainer = document.getElementById("board");
 const instructions = document.querySelector(".instructions");
@@ -7,6 +10,7 @@ const knightBtn = document.querySelector(".knight-btn");
 const destinationBtn = document.querySelector(".destination-btn");
 const travailBtn = document.querySelector(".travail-btn");
 const resetBtn = document.querySelector(".reset-btn");
+const gitHubDOMImg = document.querySelector(".github-img");
 
 const controlDOM = (() => {
   let startingPoint = "";
@@ -22,15 +26,19 @@ const controlDOM = (() => {
   };
 
   const placeKnightIcon = (e) => {
+    const coordinates = getCoordinates(e);
+    startingPoint = coordinates;
     const knightIcon = document.createElement("img");
-    knightIcon.src = "../src/assets/icons/knight.png";
+    knightIcon.src = knightImg;
     knightIcon.classList.add("board-icon");
     e.target.appendChild(knightIcon);
   };
 
   const placeHayIcon = (e) => {
+    const coordinates = getCoordinates(e);
+    desinationCords = coordinates;
     const hayIcon = document.createElement("img");
-    hayIcon.src = "../src/assets/icons/hay-bale.png";
+    hayIcon.src = hayImg;
     hayIcon.classList.add("board-icon");
     e.target.appendChild(hayIcon);
   };
@@ -57,39 +65,21 @@ const controlDOM = (() => {
   };
 
   // Prevent from calling mutiple events when repeatedly clicking buttons
-  let knightIsCalled = false;
-  let destinationIsCalled = false;
+  const removeEvents = () => {
+    boardContainer.removeEventListener("click", placeKnightIcon);
+    boardContainer.removeEventListener("click", placeHayIcon);
+  };
 
   knightBtn.addEventListener("click", () => {
-    if (knightIsCalled) return;
-    knightIsCalled = true;
+    removeEvents();
     if (Array.isArray(startingPoint)) return;
-    boardContainer.addEventListener(
-      "click",
-      (e) => {
-        const coordinates = getCoordinates(e);
-        startingPoint = coordinates;
-        placeKnightIcon(e);
-        console.log(startingPoint);
-      },
-      { once: true }
-    );
+    boardContainer.addEventListener("click", placeKnightIcon, { once: true });
   });
 
   destinationBtn.addEventListener("click", () => {
-    if (destinationIsCalled) return;
-    destinationIsCalled = true;
+    removeEvents();
     if (Array.isArray(desinationCords)) return;
-    boardContainer.addEventListener(
-      "click",
-      (e) => {
-        const coordinates = getCoordinates(e);
-        desinationCords = coordinates;
-        placeHayIcon(e);
-        console.log(desinationCords);
-      },
-      { once: true }
-    );
+    boardContainer.addEventListener("click", placeHayIcon, { once: true });
   });
 
   travailBtn.addEventListener("click", () => {
@@ -106,8 +96,6 @@ const controlDOM = (() => {
     startingPoint = "";
     desinationCords = "";
     myKnight = "";
-    knightIsCalled = false;
-    destinationIsCalled = false;
     const boardIcons = Array.from(document.querySelectorAll(".board-icon"));
     boardIcons.forEach((icon) => icon.remove());
     const squares = Array.from(document.querySelectorAll(".board-square"));
@@ -119,5 +107,6 @@ const controlDOM = (() => {
 
   resetBtn.addEventListener("click", resetGame);
 
+  gitHubDOMImg.src = gitImg;
   return {};
 })();
