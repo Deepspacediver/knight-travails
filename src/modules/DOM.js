@@ -71,14 +71,14 @@ const controlDOM = (() => {
   };
 
   knightBtn.addEventListener("click", () => {
-    removeEvents();
     if (Array.isArray(startingPoint)) return;
+    removeEvents();
     boardContainer.addEventListener("click", placeKnightIcon, { once: true });
   });
 
   destinationBtn.addEventListener("click", () => {
-    removeEvents();
     if (Array.isArray(desinationCords)) return;
+    removeEvents();
     boardContainer.addEventListener("click", placeHayIcon, { once: true });
   });
 
