@@ -26,6 +26,7 @@ const controlDOM = (() => {
   };
 
   const placeKnightIcon = (e) => {
+    if (!e.target.classList.contains("board-square")) return;
     const coordinates = getCoordinates(e);
     startingPoint = coordinates;
     const knightIcon = document.createElement("img");
@@ -35,6 +36,7 @@ const controlDOM = (() => {
   };
 
   const placeHayIcon = (e) => {
+    if (!e.target.classList.contains("board-square")) return;
     const coordinates = getCoordinates(e);
     desinationCords = coordinates;
     const hayIcon = document.createElement("img");
